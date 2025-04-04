@@ -6,6 +6,18 @@
 
 3D 手機展示應用程式是一個使用 Three.js 建立的互動式 3D 展示平台。完整的專案規格請參閱 [SPEC.md](../SPEC.md)。
 
+## 程式生成指南
+
+- 若有後續要求功能異動，請一併更新規格檔 [SPEC.md](../SPEC.md) 及說明檔 [README.md](../README.md)。
+
+## 專案特定指南
+
+請參考以下專案特定提示：
+
+#file:prompts/css.prompt.md
+#file:prompts/html.prompt.md
+#file:prompts/javascript.prompt.md
+
 ## 程式碼風格指南
 
 ### JavaScript/TypeScript
