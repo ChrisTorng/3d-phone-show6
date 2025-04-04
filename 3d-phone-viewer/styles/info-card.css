@@ -1,0 +1,49 @@
+/3d-phone-viewer/styles/info-card.css
+
+.info-card {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.info-card.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.info-card h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.info-card p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #666;
+}
+
+.info-card .close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #999;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.info-card .close-btn:hover {
+    color: #333;
+}

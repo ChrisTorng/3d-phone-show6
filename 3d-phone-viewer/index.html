@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D 手機展示應用程式</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/control-panel.css">
+    <link rel="stylesheet" href="styles/info-card.css">
+</head>
+<body>
+    <div id="app">
+        <div id="renderer-container"></div>
+        <div id="control-panel"></div>
+        <div id="info-card"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="src/core/renderer.js"></script>
+    <script src="src/core/scene-manager.js"></script>
+    <script src="src/core/phone-model.js"></script>
+    <script src="src/controls/orbit-controls.js"></script>
+    <script src="src/controls/touch-controls.js"></script>
+    <script src="src/controls/keyboard-manager.js"></script>
+    <script src="src/animation/animation-manager.js"></script>
+    <script src="src/animation/tween-manager.js"></script>
+    <script src="src/animation/auto-rotate.js"></script>
+    <script src="src/ui/control-panel.js"></script>
+    <script src="src/ui/info-card.js"></script>
+    <script src="src/ui/model-selector.js"></script>
+    <script src="src/utils/loader.js"></script>
+    <script src="src/utils/performance-monitor.js"></script>
+    <script src="src/utils/responsive-helper.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
