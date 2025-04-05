@@ -49,7 +49,7 @@ const infoCard = new InfoCard();
 const modelSelector = new ModelSelector(phoneModel);
 
 // 載入初始手機模型
-phoneModel.loadModel('assets/models/phone-model-1.glb');
+phoneModel.loadModel('assets/models/iphone_16_pro_max.glb');
 
 // 啟動渲染循環
 function animate() {

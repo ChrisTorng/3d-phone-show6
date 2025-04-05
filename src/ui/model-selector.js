@@ -18,7 +18,7 @@ export class ModelSelector {
             {
                 id: 'model1',
                 name: '手機型號 1',
-                path: 'assets/models/phone-model-1.glb',
+                path: 'assets/models/iphone_16_pro_max.glb',
                 image: 'assets/textures/phone-texture-1.webp',
                 info: {
                     screenSize: '6.1 吋',
@@ -30,7 +30,7 @@ export class ModelSelector {
             {
                 id: 'model2',
                 name: '手機型號 2',
-                path: 'assets/models/phone-model-2.glb',
+                path: 'assets/models/samsung_galaxy_s22_ultra.glb',
                 image: 'assets/textures/phone-texture-2.png',
                 info: {
                     screenSize: '6.7 吋',
