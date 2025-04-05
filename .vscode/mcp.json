@@ -1,0 +1,8 @@
+{
+    "servers": {
+        "my-mcp-server-aad2e5ff": {
+            "type": "sse",
+            "url": "https://gitmcp.io/ChrisTorng/TampermonkeyScripts"
+        }
+    }
+}

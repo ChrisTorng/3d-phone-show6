@@ -1,64 +1,131 @@
 // touch-controls.js
 
-class TouchControls {
-    constructor(camera, renderer, model) {
-        this.camera = camera;
-        this.renderer = renderer;
-        this.model = model;
+// 從全域變數獲取 THREE 物件
+const THREE = window.THREE;
 
-        this.init();
+/**
+ * 觸控控制器類別，處理行動裝置上的觸控互動
+ */
+export class TouchControls {
+    /**
+     * 建立觸控控制器
+     * @param {HTMLElement} domElement - 接收觸控事件的 DOM 元素
+     * @param {THREE.OrbitControls} orbitControls - 軌道控制器實例
+     */
+    constructor(domElement, orbitControls) {
+        this.domElement = domElement;
+        this.orbitControls = orbitControls;
+        this.touchStartPos = new THREE.Vector2();
+        this.touchEndPos = new THREE.Vector2();
+        this.multiTouchStartDistance = 0;
+        this.multiTouchEndDistance = 0;
+        this.isMultiTouch = false;
+        this.isPinching = false;
+        this.isRotating = false;
+        
+        // 綁定觸控事件處理器
+        this.bindEvents();
     }
-
-    init() {
-        this.addEventListeners();
+    
+    /**
+     * 綁定必要的觸控事件
+     */
+    bindEvents() {
+        this.domElement.addEventListener('touchstart', this.onTouchStart.bind(this), false);
+        this.domElement.addEventListener('touchmove', this.onTouchMove.bind(this), false);
+        this.domElement.addEventListener('touchend', this.onTouchEnd.bind(this), false);
     }
-
-    addEventListeners() {
-        window.addEventListener('touchstart', this.onTouchStart.bind(this), false);
-        window.addEventListener('touchmove', this.onTouchMove.bind(this), false);
-        window.addEventListener('touchend', this.onTouchEnd.bind(this), false);
-    }
-
+    
+    /**
+     * 觸控開始事件處理
+     * @param {TouchEvent} event - 觸控事件
+     */
     onTouchStart(event) {
+        event.preventDefault();
+        
         if (event.touches.length === 1) {
-            this.startX = event.touches[0].clientX;
-            this.startY = event.touches[0].clientY;
-            this.isDragging = true;
+            // 單指觸控 - 旋轉
+            this.isRotating = true;
+            this.isMultiTouch = false;
+            this.isPinching = false;
+            
+            this.touchStartPos.x = event.touches[0].pageX;
+            this.touchStartPos.y = event.touches[0].pageY;
+            
         } else if (event.touches.length === 2) {
-            this.startDistance = this.getDistance(event.touches);
-            this.isZooming = true;
+            // 雙指觸控 - 縮放或平移
+            this.isMultiTouch = true;
+            this.isRotating = false;
+            
+            // 計算兩指間的距離
+            const dx = event.touches[1].pageX - event.touches[0].pageX;
+            const dy = event.touches[1].pageY - event.touches[0].pageY;
+            this.multiTouchStartDistance = Math.sqrt(dx * dx + dy * dy);
+            
+            // 判斷是否為縮放手勢
+            this.isPinching = true;
         }
     }
-
+    
+    /**
+     * 觸控移動事件處理
+     * @param {TouchEvent} event - 觸控事件
+     */
     onTouchMove(event) {
-        if (this.isDragging && event.touches.length === 1) {
-            const deltaX = event.touches[0].clientX - this.startX;
-            const deltaY = event.touches[0].clientY - this.startY;
-
-            this.model.rotation.y += deltaX * 0.01;
-            this.model.rotation.x += deltaY * 0.01;
-
-            this.startX = event.touches[0].clientX;
-            this.startY = event.touches[0].clientY;
-        } else if (this.isZooming && event.touches.length === 2) {
-            const distance = this.getDistance(event.touches);
-            const zoomFactor = distance / this.startDistance;
-
-            this.camera.position.z *= zoomFactor;
-            this.startDistance = distance;
+        event.preventDefault();
+        
+        if (this.isRotating && event.touches.length === 1) {
+            // 單指拖動 - 旋轉
+            this.touchEndPos.x = event.touches[0].pageX;
+            this.touchEndPos.y = event.touches[0].pageY;
+            
+            // 將觸控移動轉換為模擬滑鼠移動，讓 OrbitControls 處理
+            // 此處不需要額外的邏輯，因為 OrbitControls 已經在監聽滑鼠事件
+            
+        } else if (this.isMultiTouch && event.touches.length === 2) {
+            if (this.isPinching) {
+                // 雙指捏合 - 縮放
+                const dx = event.touches[1].pageX - event.touches[0].pageX;
+                const dy = event.touches[1].pageY - event.touches[0].pageY;
+                this.multiTouchEndDistance = Math.sqrt(dx * dx + dy * dy);
+                
+                // 計算縮放比例
+                const pinchRatio = this.multiTouchEndDistance / this.multiTouchStartDistance;
+                
+                // 更新起始距離以便連續縮放
+                this.multiTouchStartDistance = this.multiTouchEndDistance;
+                
+                // 進行縮放操作
+                if (pinchRatio > 1.05) {
+                    // 放大
+                    this.orbitControls.dollyOut(0.95);
+                } else if (pinchRatio < 0.95) {
+                    // 縮小
+                    this.orbitControls.dollyIn(0.95);
+                }
+                
+                // 告知 OrbitControls 需要更新
+                this.orbitControls.update();
+            }
         }
     }
-
+    
+    /**
+     * 觸控結束事件處理
+     * @param {TouchEvent} event - 觸控事件
+     */
     onTouchEnd(event) {
-        if (event.touches.length === 0) {
-            this.isDragging = false;
-            this.isZooming = false;
-        }
+        this.isRotating = false;
+        this.isMultiTouch = false;
+        this.isPinching = false;
     }
-
-    getDistance(touches) {
-        const dx = touches[0].clientX - touches[1].clientX;
-        const dy = touches[0].clientY - touches[1].clientY;
-        return Math.sqrt(dx * dx + dy * dy);
+    
+    /**
+     * 清除所有事件監聽器
+     */
+    dispose() {
+        this.domElement.removeEventListener('touchstart', this.onTouchStart);
+        this.domElement.removeEventListener('touchmove', this.onTouchMove);
+        this.domElement.removeEventListener('touchend', this.onTouchEnd);
     }
 }

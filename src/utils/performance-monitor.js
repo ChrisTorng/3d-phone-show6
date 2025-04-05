@@ -1,5 +1,5 @@
 // performance-monitor.js
-class PerformanceMonitor {
+export class PerformanceMonitor {
     constructor() {
         this.startTime = performance.now();
         this.frames = 0;
@@ -27,5 +27,3 @@ class PerformanceMonitor {
         return (performance.now() - this.startTime) / 1000; // in seconds
     }
 }
-
-export default PerformanceMonitor;

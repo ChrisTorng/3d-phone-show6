@@ -1,8 +1,25 @@
 // 這個檔案是用來提供確保 UI 在不同螢幕尺寸下響應式的輔助函式
 
-const responsiveHelper = {
+export class ResponsiveHelper {
+    /**
+     * 建立響應式輔助工具
+     * @param {Renderer} renderer - 渲染器實例
+     * @param {SceneManager} sceneManager - 場景管理器實例
+     */
+    constructor(renderer, sceneManager) {
+        this.renderer = renderer;
+        this.sceneManager = sceneManager;
+        
+        // 綁定方法到實例
+        this.adjustUI = this.adjustUI.bind(this);
+        
+        // 監聽視窗大小變化
+        window.addEventListener('resize', this.adjustUI);
+        this.adjustUI(); // 初始調整
+    }
+
     // 設定 UI 元素的大小和位置以適應螢幕尺寸
-    adjustUI: function() {
+    adjustUI() {
         const width = window.innerWidth;
         const height = window.innerHeight;
 
@@ -19,14 +36,24 @@ const responsiveHelper = {
             renderArea.style.width = width + 'px';
             renderArea.style.height = height + 'px';
         }
-    },
-
-    // 監聽視窗大小變化事件
-    init: function() {
-        window.addEventListener('resize', this.adjustUI);
-        this.adjustUI(); // 初始調整
     }
-};
-
-// 初始化響應式輔助功能
-responsiveHelper.init();
+    
+    /**
+     * 處理視窗大小變化
+     */
+    onWindowResize() {
+        // 更新相機投影矩陣
+        if (this.renderer && this.renderer.camera) {
+            this.renderer.camera.aspect = window.innerWidth / window.innerHeight;
+            this.renderer.camera.updateProjectionMatrix();
+        }
+        
+        // 更新渲染器大小
+        if (this.renderer && this.renderer.renderer) {
+            this.renderer.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // 調整 UI
+        this.adjustUI();
+    }
+}
