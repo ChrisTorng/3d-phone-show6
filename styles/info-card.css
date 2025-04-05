@@ -1,39 +1,54 @@
 /3d-phone-viewer/styles/info-card.css
 
-.info-card {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.9);
+#info-card {
+    background-color: var(--panel-bg-color);
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    max-width: 300px;
-    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
     transition: opacity 0.3s ease;
-    opacity: 0;
+    display: block;
+}
+
+#info-card.hidden {
+    opacity: 0.5;
     pointer-events: none;
 }
 
-.info-card.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.info-card h2 {
+#info-card h2 {
     margin: 0;
     font-size: 1.5em;
-    color: #333;
+    color: var(--text-color);
 }
 
-.info-card p {
+#info-card p {
     margin: 5px 0;
     font-size: 1em;
     color: #666;
 }
 
-.info-card .close-btn {
+#info-card .specification {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+#info-card .specification:last-child {
+    border-bottom: none;
+}
+
+#info-card .spec-name {
+    font-weight: bold;
+}
+
+#info-card .spec-value {
+    color: #555;
+}
+
+#info-card .close-btn {
     background: none;
     border: none;
     cursor: pointer;
@@ -44,6 +59,21 @@
     right: 10px;
 }
 
-.info-card .close-btn:hover {
+#info-card .close-btn:hover {
     color: #333;
+}
+
+/* 在小螢幕裝置上調整資訊卡 */
+@media (max-width: 768px) {
+    #info-card {
+        padding: 10px;
+    }
+    
+    #info-card h2 {
+        font-size: 1.2em;
+    }
+    
+    #info-card p {
+        font-size: 0.9em;
+    }
 }

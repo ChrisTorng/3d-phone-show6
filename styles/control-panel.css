@@ -2,23 +2,22 @@
 
 /* 控制面板樣式 */
 
-.control-panel {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
+#control-panel {
+    background-color: var(--panel-bg-color);
     border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.control-panel h2 {
+#control-panel h2 {
     font-size: 18px;
     margin: 0 0 10px;
+    color: var(--text-color);
 }
 
-.control-panel button {
+#control-panel button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -27,20 +26,39 @@
     cursor: pointer;
     margin: 5px 0;
     transition: background-color 0.3s;
+    display: inline-block;
+    margin-right: 8px;
 }
 
-.control-panel button:hover {
+#control-panel button:hover {
     background-color: #0056b3;
 }
 
-.control-panel .icon {
+#control-panel .icon {
     width: 20px;
     height: 20px;
     margin-right: 5px;
     vertical-align: middle;
 }
 
-.control-panel .info {
+#control-panel .info {
     font-size: 14px;
     color: #333;
+    margin-top: 10px;
+}
+
+#control-panel .control-group {
+    margin-bottom: 15px;
+}
+
+/* 在小螢幕裝置上調整控制面板 */
+@media (max-width: 768px) {
+    #control-panel {
+        padding: 10px;
+    }
+    
+    #control-panel button {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
 }

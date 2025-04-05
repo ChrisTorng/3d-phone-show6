@@ -10,100 +10,105 @@ export class ModelSelector {
      */
     constructor(phoneModel) {
         this.phoneModel = phoneModel;
-        this.container = document.createElement('div');
-        this.container.className = 'model-selector';
+        this.container = document.getElementById('model-selector');
         
         // 模型資料，實際應用中可從外部配置或 API 載入
         this.models = [
             {
                 id: 'model1',
-                name: '手機型號 1',
+                name: 'iPhone 16 Pro Max',
                 path: 'assets/models/iphone_16_pro_max.glb',
                 image: 'assets/textures/phone-texture-1.webp',
                 info: {
                     screenSize: '6.1 吋',
-                    processor: '驍龍 8 Gen 2',
+                    processor: 'A17 Pro',
                     ram: '8GB',
-                    camera: '5000萬像素'
+                    camera: '5000萬像素',
+                    storage: '256GB',
+                    battery: '4,500mAh'
                 }
             },
             {
                 id: 'model2',
-                name: '手機型號 2',
+                name: 'Samsung Galaxy S22 Ultra',
                 path: 'assets/models/samsung_galaxy_s22_ultra.glb',
                 image: 'assets/textures/phone-texture-2.png',
                 info: {
                     screenSize: '6.7 吋',
-                    processor: 'A17 Pro',
+                    processor: '驍龍 8 Gen 2',
                     ram: '12GB',
-                    camera: '4800萬像素'
+                    camera: '4800萬像素',
+                    storage: '512GB',
+                    battery: '5,000mAh'
+                }
+            },
+            {
+                id: 'model3',
+                name: 'Samsung Galaxy Z Flip 3',
+                path: 'assets/models/Samsung_Galaxy_Z_Flip_3.glb',
+                image: 'assets/textures/phone-texture-1.webp',
+                info: {
+                    screenSize: '6.7 吋',
+                    processor: '驍龍 888',
+                    ram: '8GB',
+                    camera: '1200萬像素',
+                    storage: '256GB',
+                    battery: '3,300mAh'
                 }
             }
         ];
         
         // 初始化選擇器
         this.initSelector();
-        this.appendToDOM();
     }
     
     /**
      * 初始化選擇器 UI
      */
     initSelector() {
+        if (!this.container) {
+            console.error('找不到模型選擇器的容器元素');
+            return;
+        }
+        
+        // 清空容器
+        this.container.innerHTML = '';
+        
         // 建立標題
-        const title = document.createElement('h3');
-        title.textContent = '選擇模型';
-        title.className = 'selector-title';
+        const title = document.createElement('h2');
+        title.textContent = '選擇手機型號';
         this.container.appendChild(title);
         
-        // 建立模型列表
-        const modelList = document.createElement('div');
-        modelList.className = 'model-list';
+        // 建立選擇下拉選單
+        const select = document.createElement('select');
+        select.id = 'phone-model-select';
         
-        // 為每個模型建立選擇按鈕
         this.models.forEach(model => {
-            const modelItem = document.createElement('div');
-            modelItem.className = 'model-item';
-            modelItem.dataset.modelId = model.id;
-            
-            const modelImage = document.createElement('div');
-            modelImage.className = 'model-thumbnail';
-            modelImage.style.backgroundImage = `url(${model.image})`;
-            
-            const modelName = document.createElement('div');
-            modelName.className = 'model-name';
-            modelName.textContent = model.name;
-            
-            modelItem.appendChild(modelImage);
-            modelItem.appendChild(modelName);
-            
-            // 添加點擊事件，切換模型
-            modelItem.addEventListener('click', () => {
-                this.selectModel(model);
-                
-                // 更新 UI 顯示當前選擇的模型
-                document.querySelectorAll('.model-item').forEach(item => {
-                    item.classList.remove('selected');
-                });
-                modelItem.classList.add('selected');
-            });
-            
-            modelList.appendChild(modelItem);
+            const option = document.createElement('option');
+            option.value = model.id;
+            option.textContent = model.name;
+            select.appendChild(option);
         });
         
-        this.container.appendChild(modelList);
-    }
-    
-    /**
-     * 將選擇器添加到頁面
-     */
-    appendToDOM() {
-        // 默認添加到控制面板下方
-        const controlPanel = document.getElementById('control-panel');
-        if (controlPanel) {
-            controlPanel.parentNode.insertBefore(this.container, controlPanel.nextSibling);
-        } else {
-            document.getElementById('app').appendChild(this.container);
+        // 當選擇變更時載入對應的模型
+        select.addEventListener('change', (event) => {
+            const selectedModel = this.getModelById(event.target.value);
+            if (selectedModel) {
+                this.selectModel(selectedModel);
+            }
+        });
+        
+        this.container.appendChild(select);
+        
+        // 添加模型預覽區域
+        const previewContainer = document.createElement('div');
+        previewContainer.className = 'model-preview';
+        this.container.appendChild(previewContainer);
+        
+        // 預設載入第一個模型
+        if (this.models.length > 0) {
+            select.value = this.models[0].id;
+            this.selectModel(this.models[0]);
         }
     }
     
@@ -114,25 +119,91 @@ export class ModelSelector {
     selectModel(model) {
         console.log(`選擇模型: ${model.name}`);
         
+        // 更新預覽圖片
+        const previewContainer = this.container.querySelector('.model-preview');
+        if (previewContainer) {
+            previewContainer.innerHTML = '';
+            
+            if (model.image) {
+                const img = document.createElement('img');
+                img.src = model.image;
+                img.alt = model.name;
+                previewContainer.appendChild(img);
+            }
+        }
+        
         // 載入模型
         this.phoneModel.loadModel(model.path, (loadedModel) => {
             console.log(`模型載入完成: ${model.name}`);
             
             // 發出模型變更事件，讓其他組件可以響應
-            const modelChangedEvent = new CustomEvent('model-changed', { detail: model });
+            const modelChangedEvent = new CustomEvent('model-changed', { 
+                detail: { ...model } 
+            });
             window.dispatchEvent(modelChangedEvent);
             
-            // 更新控制面板中的資訊
-            const modelNameElement = document.getElementById('model-name');
-            const screenSizeElement = document.getElementById('screen-size');
-            const processorElement = document.getElementById('processor');
-            const ramElement = document.getElementById('ram');
-            
-            if (modelNameElement) modelNameElement.textContent = model.name;
-            if (screenSizeElement) screenSizeElement.textContent = model.info.screenSize;
-            if (processorElement) processorElement.textContent = model.info.processor;
-            if (ramElement) ramElement.textContent = model.info.ram;
+            // 更新資訊卡的內容
+            this.updateInfoCard(model);
         });
+    }
+    
+    /**
+     * 更新資訊卡的內容
+     * @param {Object} model - 模型資訊
+     */
+    updateInfoCard(model) {
+        const infoCard = document.getElementById('info-card');
+        if (!infoCard) return;
+        
+        // 清空現有內容
+        infoCard.innerHTML = '';
+        
+        // 添加標題
+        const title = document.createElement('h2');
+        title.textContent = model.name;
+        infoCard.appendChild(title);
+        
+        // 添加描述
+        const description = document.createElement('p');
+        description.textContent = '手機規格資訊';
+        infoCard.appendChild(description);
+        
+        // 創建規格列表
+        const specsList = document.createElement('div');
+        specsList.className = 'specs-list';
+        
+        // 添加各項規格
+        for (const [key, value] of Object.entries(model.info)) {
+            const specItem = document.createElement('div');
+            specItem.className = 'specification';
+            
+            const specName = document.createElement('span');
+            specName.className = 'spec-name';
+            
+            // 將駝峰式命名轉換為中文顯示名稱
+            let displayName = key;
+            switch (key) {
+                case 'screenSize': displayName = '螢幕尺寸'; break;
+                case 'processor': displayName = '處理器'; break;
+                case 'ram': displayName = '記憶體'; break;
+                case 'camera': displayName = '相機'; break;
+                case 'storage': displayName = '儲存空間'; break;
+                case 'battery': displayName = '電池'; break;
+                default: displayName = key;
+            }
+            
+            specName.textContent = displayName;
+            
+            const specValue = document.createElement('span');
+            specValue.className = 'spec-value';
+            specValue.textContent = value;
+            
+            specItem.appendChild(specName);
+            specItem.appendChild(specValue);
+            specsList.appendChild(specItem);
+        }
+        
+        infoCard.appendChild(specsList);
     }
     
     /**

@@ -16,8 +16,11 @@ export class Renderer {
             precision: 'highp'
         });
         
+        // 獲取容器尺寸，而非使用整個視窗尺寸
+        const containerRect = this.container.getBoundingClientRect();
+        
         this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(containerRect.width, containerRect.height);
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.outputEncoding = THREE.sRGBEncoding;
@@ -28,7 +31,7 @@ export class Renderer {
         // 建立相機
         this.camera = new THREE.PerspectiveCamera(
             45, 
-            window.innerWidth / window.innerHeight, 
+            containerRect.width / containerRect.height, 
             0.1, 
             1000
         );
@@ -36,6 +39,17 @@ export class Renderer {
         
         // 基本光源設置
         this.setupLights();
+        
+        // 監聽視窗大小變化
+        window.addEventListener('resize', this.handleResize.bind(this));
+    }
+    
+    /**
+     * 處理視窗大小變化
+     */
+    handleResize() {
+        const containerRect = this.container.getBoundingClientRect();
+        this.resize(containerRect.width, containerRect.height);
     }
     
     /**
@@ -66,8 +80,8 @@ export class Renderer {
     
     /**
      * 調整渲染器和相機以適應視窗大小
-     * @param {number} width - 視窗寬度
-     * @param {number} height - 視窗高度
+     * @param {number} width - 容器寬度
+     * @param {number} height - 容器高度
      */
     resize(width, height) {
         this.camera.aspect = width / height;
