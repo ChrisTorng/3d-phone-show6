@@ -1,0 +1,300 @@
+[
+  {
+    "id": "iphone_16_pro_max",
+    "brand": "Apple",
+    "model": "iPhone 16 Pro Max",
+    "releaseDate": "2024-09",
+    "modelFile": "iphone_16_pro_max.glb",
+    "thumbnailImage": "phone-texture-1.webp",
+    "colors": ["黑色鈦金屬", "白色鈦金屬", "原色鈦金屬", "沙漠色鈦金屬"],
+    "display": {
+      "size": 6.9,
+      "resolution": "2868 x 1320",
+      "ppi": 460,
+      "type": "OLED",
+      "refreshRate": 120,
+      "features": [
+        "ProMotion 自適應更新率",
+        "動態島",
+        "永遠顯示",
+        "最高 2000 nits 亮度",
+        "HDR 顯示"
+      ]
+    },
+    "dimensions": {
+      "height": 163,
+      "width": 77.6,
+      "thickness": 8.25,
+      "weight": 227
+    },
+    "processor": {
+      "chipset": "A18 Pro 仿生晶片",
+      "cpu": "6 核心 CPU (2 個效能核心與 4 個節能核心)",
+      "gpu": "6 核心 GPU",
+      "neuralEngine": "16 核心神經網路引擎"
+    },
+    "memory": {
+      "ram": "8GB LPDDR5X",
+      "storageOptions": ["256GB", "512GB", "1TB"]
+    },
+    "camera": {
+      "rear": [
+        {
+          "type": "廣角",
+          "megapixels": 48,
+          "aperture": "f/1.78",
+          "features": ["第 2 代感光元件位移式光學影像穩定功能", "100% Focus Pixels"]
+        },
+        {
+          "type": "超廣角",
+          "megapixels": 48,
+          "aperture": "f/2.2",
+          "features": ["120° 視角", "Hybrid Focus Pixels"]
+        },
+        {
+          "type": "望遠",
+          "megapixels": 12,
+          "aperture": "f/2.8",
+          "features": ["5 倍光學變焦", "最高可達 25 倍數位變焦"]
+        }
+      ],
+      "front": {
+        "megapixels": 12,
+        "aperture": "f/1.9",
+        "features": ["原深感測相機", "支援 Face ID"]
+      },
+      "videoRecording": ["4K 60fps", "4K 120fps 杜比視界", "ProRes 錄影"]
+    },
+    "battery": {
+      "capacity": "支援最長 33 小時影片播放",
+      "charging": ["45W 有線快充", "25W MagSafe 無線充電", "15W Qi2 無線充電"]
+    },
+    "connectivity": {
+      "usb": "USB Type-C (USB 3，速度最高可達 10Gb/s)",
+      "wifi": "Wi-Fi 7",
+      "bluetooth": "5.3",
+      "cellular": "5G"
+    },
+    "security": ["Face ID 臉部辨識"],
+    "features": [
+      "相機控制鍵",
+      "動作按鈕",
+      "IP68 防水防塵",
+      "Apple Intelligence",
+      "動態島"
+    ],
+    "materials": {
+      "frame": "鈦金屬",
+      "backPanel": "霧面玻璃",
+      "frontPanel": "超瓷晶盾"
+    },
+    "highlights": [
+      "強大的 A18 Pro 處理器提供頂級效能",
+      "專業相機系統帶來卓越攝影體驗",
+      "超窄邊框設計與大型 6.9 吋顯示器",
+      "支援 Apple Intelligence 生成式 AI 應用"
+    ]
+  },
+  {
+    "id": "samsung_galaxy_s22_ultra",
+    "brand": "Samsung",
+    "model": "Galaxy S22 Ultra",
+    "releaseDate": "2022-03",
+    "modelFile": "samsung_galaxy_s22_ultra.glb",
+    "thumbnailImage": "phone-texture-2.png",
+    "colors": ["夜幕紅", "皎月白", "星際黑", "極光綠"],
+    "display": {
+      "size": 6.8,
+      "resolution": "3088 x 1440",
+      "ppi": 500,
+      "type": "Dynamic AMOLED 2X",
+      "refreshRate": 120,
+      "features": [
+        "120Hz 自適應更新率",
+        "HDR10+ 認證",
+        "最高 1750 nits 亮度"
+      ]
+    },
+    "dimensions": {
+      "height": 163.3,
+      "width": 77.9,
+      "thickness": 8.9,
+      "weight": 228
+    },
+    "processor": {
+      "chipset": "Qualcomm Snapdragon 8 Gen 1",
+      "cpu": "8 核心處理器",
+      "gpu": "Adreno GPU",
+      "processNode": "4nm"
+    },
+    "memory": {
+      "ram": "8GB/12GB",
+      "storageOptions": ["128GB", "256GB", "512GB", "1TB"]
+    },
+    "camera": {
+      "rear": [
+        {
+          "type": "廣角",
+          "megapixels": 108,
+          "aperture": "f/1.8",
+          "features": ["光學影像穩定", "雷射自動對焦"]
+        },
+        {
+          "type": "超廣角",
+          "megapixels": 12,
+          "aperture": "f/2.2",
+          "features": ["120° 視角"]
+        },
+        {
+          "type": "望遠",
+          "megapixels": 10,
+          "aperture": "f/2.4",
+          "features": ["3 倍光學變焦"]
+        },
+        {
+          "type": "長焦",
+          "megapixels": 10,
+          "aperture": "f/4.9",
+          "features": ["10 倍光學變焦", "最高 100 倍數位變焦"]
+        }
+      ],
+      "front": {
+        "megapixels": 40,
+        "aperture": "f/2.2",
+        "features": ["自動對焦"]
+      },
+      "videoRecording": ["8K 24fps", "4K 60fps", "Super Steady 影片"]
+    },
+    "battery": {
+      "capacity": "5000 mAh",
+      "charging": ["45W 超快速充電", "15W 無線充電", "無線電力分享"]
+    },
+    "connectivity": {
+      "usb": "USB Type-C",
+      "wifi": "Wi-Fi 6E",
+      "bluetooth": "5.2",
+      "cellular": "5G"
+    },
+    "security": ["超聲波螢幕指紋辨識", "臉部辨識"],
+    "features": [
+      "內建 S Pen",
+      "IP68 防水防塵",
+      "Samsung DeX",
+      "AKG 立體聲喇叭",
+      "Dolby Atmos"
+    ],
+    "materials": {
+      "frame": "Armor 鋁合金",
+      "backPanel": "霧面玻璃",
+      "frontPanel": "康寧大猩猩 Victus+"
+    },
+    "highlights": [
+      "S 系列首款內建 S Pen 的手機",
+      "強大的四鏡頭相機系統",
+      "5000 mAh 大容量電池",
+      "頂級的 Snapdragon 8 Gen 1 處理器"
+    ]
+  },
+  {
+    "id": "samsung_galaxy_z_flip_3",
+    "brand": "Samsung",
+    "model": "Galaxy Z Flip 3",
+    "releaseDate": "2021-08",
+    "modelFile": "Samsung_Galaxy_Z_Flip_3.glb",
+    "thumbnailImage": "phone-texture-2.png",
+    "colors": ["奶油白", "魅影黑", "薰紫", "酷墨綠"],
+    "display": {
+      "main": {
+        "size": 6.7,
+        "resolution": "2640 x 1080",
+        "ppi": 425,
+        "type": "Dynamic AMOLED 2X",
+        "refreshRate": 120,
+        "features": [
+          "可折疊螢幕",
+          "HDR10+",
+          "自適應更新率"
+        ]
+      },
+      "cover": {
+        "size": 1.9,
+        "resolution": "512 x 260",
+        "type": "Super AMOLED",
+        "features": ["觸控功能", "比前代增大 4 倍"]
+      }
+    },
+    "dimensions": {
+      "unfolded": {
+        "height": 166,
+        "width": 72.2,
+        "thickness": 6.9
+      },
+      "folded": {
+        "height": 86.4,
+        "width": 72.2,
+        "thickness": 17.1
+      },
+      "weight": 183
+    },
+    "processor": {
+      "chipset": "Qualcomm Snapdragon 888",
+      "cpu": "8 核心處理器",
+      "gpu": "Adreno 660",
+      "processNode": "5nm"
+    },
+    "memory": {
+      "ram": "8GB LPDDR5",
+      "storageOptions": ["128GB", "256GB"]
+    },
+    "camera": {
+      "rear": [
+        {
+          "type": "廣角",
+          "megapixels": 12,
+          "aperture": "f/1.8",
+          "features": ["光學影像穩定", "雙像素自動對焦"]
+        },
+        {
+          "type": "超廣角",
+          "megapixels": 12,
+          "aperture": "f/2.2",
+          "features": ["123° 視角"]
+        }
+      ],
+      "front": {
+        "megapixels": 10,
+        "aperture": "f/2.4",
+        "features": ["自拍模式"]
+      },
+      "videoRecording": ["4K 60fps", "HD 慢動作"]
+    },
+    "battery": {
+      "capacity": "3300 mAh",
+      "charging": ["15W 有線快充", "10W 無線充電", "4.5W 反向無線充電"]
+    },
+    "connectivity": {
+      "usb": "USB Type-C",
+      "wifi": "Wi-Fi 6",
+      "bluetooth": "5.1",
+      "cellular": "5G"
+    },
+    "security": ["側邊指紋辨識", "臉部辨識"],
+    "features": [
+      "IPX8 防水設計",
+      "摺疊設計",
+      "Flex 模式",
+      "封面螢幕可顯示通知與控制音樂"
+    ],
+    "materials": {
+      "frame": "鋁合金",
+      "backPanel": "康寧大猩猩玻璃 Victus",
+      "foldingMechanism": "新一代 Hideaway 轉軸"
+    },
+    "highlights": [
+      "獨特的摺疊設計，收納更加輕便",
+      "增大的封面螢幕更實用",
+      "現代化的效能與 5G 連接",
+      "IPX8 防水能力"
+    ]
+  }
+]
