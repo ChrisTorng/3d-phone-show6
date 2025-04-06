@@ -10,14 +10,14 @@
 
 若有需要產出下列相關檔案，再參考以下提示檔:
 
-- CSS: prompts/css.prompt.md
-- HTML: prompts/html.prompt.md
-- JavaScript: prompts/javascript.prompt.md
+- CSS: #file:prompts/css.prompt.md
+- HTML: #file:prompts/html.prompt.md
+- JavaScript: #file:prompts/javascript.prompt.md
 
 若有後續要求功能異動，請一併更新:
 
-- 規格檔 SPEC.md
-- 說明檔 README.md
+- 規格檔 #file:../SPEC.md
+- 說明檔 #file:../README.md
 
 ## 程式碼風格指南
 
