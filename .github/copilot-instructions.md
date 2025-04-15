@@ -44,6 +44,20 @@ alwaysApply: true
 - 互動控制：OrbitControls、DragControls
 - 使用者介面：HTML5、CSS3
 
+## 專案特定指南
+
+若有需要產出下列相關檔案，再參考以下提示檔:
+
+- CSS: #file:prompts/css.prompt.md
+- HTML: #file:prompts/html.prompt.md
+- JavaScript: #file:prompts/javascript.prompt.md
+- Python: #file:prompts/python.prompt.md
+
+若有後續要求功能異動，請一併更新:
+
+- 規格檔 #file:../SPEC.md
+- 說明檔 #file:../README.md
+
 ## JavaScript/TypeScript 程式碼慣例
 
 ### 命名慣例
