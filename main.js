@@ -52,8 +52,10 @@ const modelSelector = new ModelSelector(phoneModel);
 phoneModel.loadModel('assets/models/iphone_16_pro_max.glb');
 
 // 啟動渲染循環
+let animationId = null;
+
 function animate() {
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
     
     // 更新控制器
     orbitControls.controls.update();
@@ -65,8 +67,29 @@ function animate() {
     // 渲染場景
     renderer.render(sceneManager.scene);
     
-    // 監控效能
-    performanceMonitor.update();
+    // 監控效能並根據場景活動狀態調整渲染頻率
+    const needsHighFrequencyRendering = performanceMonitor.update();
+    
+    // 如果場景靜止且沒有執行中的動畫，可以降低渲染頻率
+    if (!needsHighFrequencyRendering && !animationManager.hasActiveAnimations() && !autoRotate.isEnabled()) {
+        // 取消目前的動畫循環並設定低頻率更新
+        cancelAnimationFrame(animationId);
+        animationId = setTimeout(() => {
+            animationId = requestAnimationFrame(animate);
+        }, 100); // 降低到約 10fps
+    }
+}
+
+// 提供停止動畫的方法
+function stopAnimation() {
+    if (animationId !== null) {
+        if (typeof animationId === 'number') {
+            cancelAnimationFrame(animationId);
+        } else {
+            clearTimeout(animationId);
+        }
+        animationId = null;
+    }
 }
 
 // 處理視窗大小變化

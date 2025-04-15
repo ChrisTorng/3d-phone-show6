@@ -71,8 +71,24 @@ export class TouchControls {
      * 觸控移動事件處理
      * @param {TouchEvent} event - 觸控事件
      */
+    /**
+     * 觸控移動事件處理，使用 throttle 防止過頻繁呼叫
+     * @param {TouchEvent} event - 觸控事件
+     */
     onTouchMove(event) {
         event.preventDefault();
+
+        // 使用節流技術避免過於頻繁的處理
+        if (!this._throttleTimer) {
+            this._throttleTimer = setTimeout(() => {
+                this._throttleTimer = null;
+            }, 16); // 約 60fps
+        } else {
+            return;
+        }
+        
+        // 記錄用戶活動，重置效能監控的靜態計時器
+        this.lastUserActivity = Date.now();
         
         if (this.isRotating && event.touches.length === 1) {
             // 單指拖動 - 旋轉
@@ -95,7 +111,7 @@ export class TouchControls {
                 // 更新起始距離以便連續縮放
                 this.multiTouchStartDistance = this.multiTouchEndDistance;
                 
-                // 進行縮放操作
+                // 進行縮放操作，使用門檻值避免微小變化觸發縮放
                 if (pinchRatio > 1.05) {
                     // 放大
                     this.orbitControls.dollyOut(0.95);

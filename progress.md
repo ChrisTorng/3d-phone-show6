@@ -4,4 +4,4 @@
 2. Agent: 請依 #file:metaprompt.md 建立 .github\copilot-instructions.md
 3. Agent: 請再建立 .github\prompts\python.prompt.md。
    另手動更新 copilot-instructions.md 中引用 prompt 檔項目。
-4. Agent: 請依目前的
+4. Agent: 請依目前指定的程式碼生成規則，更新所有程式碼。

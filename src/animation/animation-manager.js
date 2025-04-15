@@ -164,6 +164,14 @@ export class AnimationManager {
     }
     
     /**
+     * 檢查是否有活動中的動畫
+     * @returns {boolean} - 是否有動畫正在播放
+     */
+    hasActiveAnimations() {
+        return this.activeAnimations.length > 0;
+    }
+    
+    /**
      * 停止所有動畫
      */
     stopAllAnimations() {
