@@ -5,3 +5,4 @@
 3. Agent: 請再建立 .github\prompts\python.prompt.md。
    另手動更新 copilot-instructions.md 中引用 prompt 檔項目。
 4. Agent: 請依目前指定的程式碼生成規則，更新所有程式碼。
+5. Self: 增加 .github\10xrules\*.prompt.md。
